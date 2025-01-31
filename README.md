@@ -6,18 +6,18 @@ A Flask-based API that retrieves, stores, and serves Common Vulnerabilities and 
 
 ---
 
-## 📌 Features
-✅ Fetch and store CVEs from the **NVD API** in a MySQL database  
-✅ Filter CVEs by CVE ID, Year, CVSS Score, Last Modified Date**  
-✅ Periodic data synchronization (batch update)  
-✅ RESTful API endpoints with **Flask**  
-✅ Swagger UI for API documentation  
-✅ Simple UI with HTML, CSS, JavaScript  
-✅ Docker support for containerized deployment  
+##  Features
+- Fetch and store CVEs from the **NVD API** in a MySQL database  
+- Filter CVEs by CVE ID, Year, CVSS Score, Last Modified Date**  
+- Periodic data synchronization (batch update)  
+- RESTful API endpoints with **Flask**  
+- Swagger UI for API documentation  
+- Simple UI with HTML, CSS, JavaScript  
+- Docker support for containerized deployment  
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 - Backend: Flask (Python)  
 - Database: MySQL  
 - Frontend: HTML, CSS, JavaScript  
@@ -26,16 +26,16 @@ A Flask-based API that retrieves, stores, and serves Common Vulnerabilities and 
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 Follow these steps to set up the project locally.
 
-### 1️⃣ Clone the Repository
+### 1️. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/cve-api-flask.git
 cd cve-api-flask
 ```
 
-### 2️⃣ Install Dependencies
+### 2. Install Dependencies
 Make sure Python 3.8+ is installed. Then, install the required packages:  
 ```bash
 pip install -r requirements.txt
@@ -45,7 +45,7 @@ OR manually install the required dependencies:
 pip install flask flasgger flask-cors mysql-connector-python
 ```
 
-### 3️⃣ Setup MySQL Database
+### 3️. Setup MySQL Database
 1. Open MySQL Workbenchor use a terminal and create a database:
    ```sql
    CREATE DATABASE cve_data;
@@ -74,7 +74,7 @@ pip install flask flasgger flask-cors mysql-connector-python
 
 ---
 
-##🎯 Running the Project
+## Running the Project
 ### Start the Flask Server
 ```bash
 python app.py
@@ -97,13 +97,13 @@ python app.py
 
 ---
 
- 💻 UI Integratio
-### 1️⃣ Open `index.html` in your Browser
+  UI Integration
+### 1️. Open `index.html` in your Browser
 - The UI will display CVE records in a table  
 - Click on a row to view detailed CVE information 
 - Supports pagination and sorting by date
 
-### 2️⃣ Start a Simple HTTP Server for Testing
+### 2️. Start a Simple HTTP Server for Testing
 ```bash
 python -m http.server 8000
 ```
@@ -111,12 +111,12 @@ python -m http.server 8000
 
 ---
 
-## 🐳 Running with Docker (Optional)
-### 1️⃣ Build the Docker Image
+##  Running with Docker (Optional)
+### 1. Build the Docker Image
 ```bash
 docker build -t cve-api .
 ```
-### 2️⃣ Run the Container
+### 2️. Run the Container
 ```bash
 docker run -p 5000:5000 cve-api
 ```
