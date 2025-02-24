@@ -1,17 +1,37 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const resultsPerPage = document.getElementById("resultsPerPage");
-    resultsPerPage.addEventListener("change", fetchCVEData);
+    resultsPerPage.addEventListener("change", applyFilters);
 
-    function fetchCVEData() {
-        let limit = resultsPerPage.value;
-        fetch(`/api/cves?limit=${limit}`)
-            .then(response => response.json())
-            .then(data => {
+    let currentPage = 1;
+    let totalPages = 1;
+
+    
+    function applyFilters() {
+        const cveId = document.getElementById("cveIdFilter").value;
+        const cvss = document.getElementById("cvssFilter").value;
+        const date = document.getElementById("dateFilter").value;
+        const limit = resultsPerPage.value;
+
+        fetchCVEData(currentPage, limit, cveId, cvss, date);
+    }
+
+    
+    function fetchCVEData(page, limit, cveId = "", cvss = "", date = "") {
+        const url = `/api/cves?page=${page}&limit=${limit}&cveId=${cveId}&cvss=${cvss}&date=${date}`;
+
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
                 let tbody = document.getElementById("cveTableBody");
                 tbody.innerHTML = "";
-                document.getElementById("totalRecords").innerText = data.total;
 
-                data.results.forEach(cve => {
+                
+                document.getElementById("totalRecords").innerText = data.total;
+                totalPages = Math.ceil(data.total / limit);
+                document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${totalPages}`;
+
+                
+                data.results.forEach((cve) => {
                     let row = `<tr onclick="viewCVE('${cve.cve_id}')">
                         <td>${cve.cve_id}</td>
                         <td>${cve.description}</td>
@@ -21,12 +41,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     tbody.innerHTML += row;
                 });
             })
-            .catch(error => console.error("Error fetching CVEs:", error));
+            .catch((error) => console.error("Error fetching CVEs:", error));
     }
 
-    window.viewCVE = function(cveID) {
+    
+    window.changePage = function (page) {
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        applyFilters();
+    };
+
+    
+    window.viewCVE = function (cveID) {
         window.location.href = `/cves/cve-${cveID}`;
     };
 
-    fetchCVEData(); // Load data initially
+   
+    applyFilters();
 });
