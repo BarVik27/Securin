@@ -8,12 +8,26 @@
 </head>
 <body>
     <h1>CVE List</h1>
-    <label for="resultsPerPage">Results Per Page:</label>
-    <select id="resultsPerPage">
-        <option value="10">10</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-    </select>
+
+    
+    <div>
+        <input type="text" id="cveIdFilter" placeholder="Filter by CVE ID">
+        <input type="text" id="cvssFilter" placeholder="Filter by CVSS Score">
+        <input type="date" id="dateFilter" placeholder="Filter by Date">
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    
+    <div>
+        <label for="resultsPerPage">Results Per Page:</label>
+        <select id="resultsPerPage" onchange="applyFilters()">
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+
+    
     <table>
         <thead>
             <tr>
@@ -25,7 +39,19 @@
         </thead>
         <tbody id="cveTableBody"></tbody>
     </table>
+
+   
     <p>Total Records: <span id="totalRecords">0</span></p>
+
+    
+    <div>
+        <button onclick="changePage(1)">First</button>
+        <button onclick="changePage(currentPage - 1)">Previous</button>
+        <span id="pageInfo">Page 1 of 1</span>
+        <button onclick="changePage(currentPage + 1)">Next</button>
+        <button onclick="changePage(totalPages)">Last</button>
+    </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
